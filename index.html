@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>광장대리점_위탁판매계약서</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
+        /* 기본 스타일 및 폰트 설정 */
         body {
-            font-family: 'Malgun Gothic', '나눔고딕', sans-serif;
-            background-color: #f4f7f6;
+            font-family: 'Nanum Gothic', sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,7 +17,7 @@
             align-items: center;
             height: 100vh;
             
-            /* 텍스트 선택(드래그) 방지 CSS */
+            /* 보안: 텍스트 선택(드래그) 방지 */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -24,78 +26,98 @@
 
         .container {
             background-color: #ffffff;
-            padding: 40px 50px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 450px;
+            max-width: 520px;
             width: 100%;
+            border-top: 8px solid #002060; /* 메인 색상 강조 */
         }
 
         h1 {
-            color: #333333;
-            font-size: 24px;
-            margin-bottom: 10px;
+            color: #002060; /* 딥 블루 색상 */
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
         }
 
-        p {
-            color: #666666;
-            font-size: 14px;
-            margin-bottom: 30px;
+        /* 상단 한 줄 안내 문구 (붉은색 + 두껍게) */
+        p.description {
+            color: #d93025; 
+            font-weight: 700; 
+            font-size: 15px;
+            margin-bottom: 35px;
+            line-height: 1.6;
         }
 
         .section-box {
-            background-color: #fafbfc;
-            border: 1px solid #e1e4e6;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         .section-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: #222222;
-            margin-bottom: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #002060;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background-color: #002060;
+            margin-right: 10px;
+            border-radius: 2px;
         }
 
         .label {
             font-size: 13px;
-            color: #666666;
+            color: #6c757d;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
-        /* 선택박스(Select) 스타일 */
+        /* 선택박스 스타일 */
         select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             font-size: 15px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
             background-color: #ffffff;
             outline: none;
             box-sizing: border-box;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
+            color: #333;
         }
 
         select:focus {
-            border-color: #0056b3;
+            border-color: #002060;
+            box-shadow: 0 0 0 3px rgba(0, 32, 96, 0.1);
         }
 
         /* 다운로드 버튼 스타일 */
         .download-btn {
             display: block;
-            background-color: #0056b3;
+            background-color: #002060;
             color: #ffffff;
             text-decoration: none;
-            padding: 14px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 15px;
+            padding: 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 16px;
             text-align: center;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             width: 100%;
@@ -103,42 +125,52 @@
         }
 
         .download-btn:hover {
-            background-color: #004494;
+            background-color: #001540;
+            transform: translateY(-1px);
         }
 
-        /* 공통 안내 파일 버튼 스타일 (회색) */
         .download-btn.secondary {
-            background-color: #6c757d;
+            background-color: #495057;
+            margin-top: 10px;
         }
 
         .download-btn.secondary:hover {
-            background-color: #5a6268;
+            background-color: #343a40;
+        }
+
+        /* 하단 안내 문구 스타일 */
+        .footer-note {
+            font-size: 13px;
+            color: #d93025;
+            margin-top: 15px;
+            font-weight: 700;
         }
     </style>
 </head>
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
     <div class="container">
-        <h1>광장대리점_계약서</h1>
-        <p>필요한 계약서 항목과 금액을 선택하여 다운로드하세요.</p>
+        <h1>광장대리점_위탁판매계약서</h1>
+        
+        <p class="description">영업사원에게 안내 받은 금액에 따라 위탁판매계약서 다운로드하세요.</p>
 
         <div class="section-box">
-            <div class="section-title">📄 위탁판매계약서</div>
-            <label class="label" for="amountType">계약 금액을 선택해 주세요.</label>
+            <div class="section-title">위탁판매계약서 다운로드</div>
+            <label class="label">계약 금액 선택</label>
             <select id="amountType">
                 <option value="1천만원">1천만원</option>
                 <option value="2천만원">2천만원</option>
                 <option value="3천만원">3천만원</option>
             </select>
-            <button class="download-btn" onclick="downloadContract()">위탁판매계약서 다운로드</button>
+            <button class="download-btn" onclick="downloadContract()">계약서 파일 받기</button>
         </div>
 
         <div class="section-box">
-            <div class="section-title">💡 안내 자료</div>
-            <label class="label">계약서 작성 방법 및 주의사항입니다.</label>
+            <div class="section-title">작성 가이드 안내</div>
             <a href="./files/계약서_작성방식.pdf" download class="download-btn secondary">
                 계약서 작성방식 다운로드
             </a>
+            <div class="footer-note">※ 계약서 외 구비서류는 담당 영업사원에게 별도 문의</div>
         </div>
     </div>
 
@@ -156,17 +188,15 @@
             document.body.removeChild(link);
         }
 
-        // 키보드 단축키 방지 (F12 개발자 도구, Ctrl+Shift+I, Ctrl+C 복사 등) 추가 옵션
-        document.addEventListener('keydown', function(event) {
-            if (event.keyCode === 123 || // F12
-                (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
-                (event.ctrlKey && event.keyCode === 67) || // Ctrl+C
-                (event.ctrlKey && event.keyCode === 86) || // Ctrl+V
-                (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U (소스보기)
-                event.preventDefault();
+        // 보안: 개발자 도구 및 복사 단축키 방지
+        document.addEventListener('keydown', function(e) {
+            if (e.keyCode === 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || 
+                (e.ctrlKey && e.keyCode === 67) || 
+                (e.ctrlKey && e.keyCode === 85)) {
+                e.preventDefault();
             }
         });
     </script>
-
 </body>
 </html>
