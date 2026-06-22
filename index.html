@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>광장대리점_계약서</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px 50px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        /* 선택박스(Select) 스타일 */
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        select:focus {
+            border-color: #0056b3;
+        }
+
+        /* 구분선 */
+        .divider {
+            margin: 25px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        /* 다운로드 버튼 스타일 */
+        .download-btn {
+            display: block;
+            background-color: #0056b3;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .download-btn:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>광장대리점_계약서</h1>
+        <p>항목과 금액을 선택하신 후 다운로드 버튼을 클릭하세요.</p>
+
+        <div class="section-title">1. 계약 종류 선택</div>
+        <select id="contractType">
+            <option value="신규관설">신규관설</option>
+            <option value="관계설정">관계설정</option>
+        </select>
+
+        <div class="section-title">2. 계약 금액 선택</div>
+        <select id="amountType">
+            <option value="1천만원">1천만원</option>
+            <option value="2천만원">2천만원</option>
+            <option value="3천만원">3천만원</option>
+        </select>
+
+        <button class="download-btn" onclick="downloadContract()">계약서 다운로드</button>
+
+        <hr class="divider">
+
+        <div class="section-title">공통 안내 파일</div>
+        <a href="./files/계약서_작성방식.pdf" download class="download-btn" style="background-color: #6c757d;">
+            계약서 작성방식 안내 다운로드
+        </a>
+    </div>
+
+    <script>
+        function downloadContract() {
+            // 사용자가 선택한 항목과 금액 가져오기
+            const contract = document.getElementById('contractType').value;
+            const amount = document.getElementById('amountType').value;
+
+            // 파일명 조합 (예: 신규관설_1천만원.pdf)
+            const fileName = contract + "_" + amount + ".pdf";
+            
+            // 파일이 저장된 실제 경로 생성
+            const filePath = "./files/" + fileName;
+
+            // 가상의 다운로드 링크를 만들어 브라우저에 다운로드 명령 실행
+            const link = document.createElement('a');
+            link.href = filePath;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
