@@ -14,6 +14,12 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            
+            /* 텍스트 선택(드래그) 방지 CSS */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .container {
@@ -35,16 +41,30 @@
         p {
             color: #666666;
             font-size: 14px;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .section-box {
+            background-color: #fafbfc;
+            border: 1px solid #e1e4e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
         }
 
         .section-title {
-            text-align: left;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
-            color: #555;
-            margin-bottom: 8px;
-            margin-top: 15px;
+            color: #222222;
+            margin-bottom: 12px;
+        }
+
+        .label {
+            font-size: 13px;
+            color: #666666;
+            display: block;
+            margin-bottom: 6px;
         }
 
         /* 선택박스(Select) 스타일 */
@@ -52,23 +72,16 @@
             width: 100%;
             padding: 12px;
             font-size: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #cccccc;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #ffffff;
             outline: none;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         select:focus {
             border-color: #0056b3;
-        }
-
-        /* 구분선 */
-        .divider {
-            margin: 25px 0;
-            border: 0;
-            border-top: 1px solid #eee;
         }
 
         /* 다운로드 버튼 스타일 */
@@ -77,10 +90,11 @@
             background-color: #0056b3;
             color: #ffffff;
             text-decoration: none;
-            padding: 15px 20px;
+            padding: 14px 20px;
             border-radius: 5px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
+            text-align: center;
             transition: background-color 0.3s ease;
             cursor: pointer;
             border: none;
@@ -91,50 +105,49 @@
         .download-btn:hover {
             background-color: #004494;
         }
+
+        /* 공통 안내 파일 버튼 스타일 (회색) */
+        .download-btn.secondary {
+            background-color: #6c757d;
+        }
+
+        .download-btn.secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
     <div class="container">
         <h1>광장대리점_계약서</h1>
-        <p>항목과 금액을 선택하신 후 다운로드 버튼을 클릭하세요.</p>
+        <p>필요한 계약서 항목과 금액을 선택하여 다운로드하세요.</p>
 
-        <div class="section-title">1. 계약 종류 선택</div>
-        <select id="contractType">
-            <option value="신규관설">신규관설</option>
-            <option value="관계설정">관계설정</option>
-        </select>
+        <div class="section-box">
+            <div class="section-title">📄 위탁판매계약서</div>
+            <label class="label" for="amountType">계약 금액을 선택해 주세요.</label>
+            <select id="amountType">
+                <option value="1천만원">1천만원</option>
+                <option value="2천만원">2천만원</option>
+                <option value="3천만원">3천만원</option>
+            </select>
+            <button class="download-btn" onclick="downloadContract()">위탁판매계약서 다운로드</button>
+        </div>
 
-        <div class="section-title">2. 계약 금액 선택</div>
-        <select id="amountType">
-            <option value="1천만원">1천만원</option>
-            <option value="2천만원">2천만원</option>
-            <option value="3천만원">3천만원</option>
-        </select>
-
-        <button class="download-btn" onclick="downloadContract()">계약서 다운로드</button>
-
-        <hr class="divider">
-
-        <div class="section-title">공통 안내 파일</div>
-        <a href="./files/계약서_작성방식.pdf" download class="download-btn" style="background-color: #6c757d;">
-            계약서 작성방식 안내 다운로드
-        </a>
+        <div class="section-box">
+            <div class="section-title">💡 안내 자료</div>
+            <label class="label">계약서 작성 방법 및 주의사항입니다.</label>
+            <a href="./files/계약서_작성방식.pdf" download class="download-btn secondary">
+                계약서 작성방식 다운로드
+            </a>
+        </div>
     </div>
 
     <script>
         function downloadContract() {
-            // 사용자가 선택한 항목과 금액 가져오기
-            const contract = document.getElementById('contractType').value;
             const amount = document.getElementById('amountType').value;
-
-            // 파일명 조합 (예: 신규관설_1천만원.pdf)
-            const fileName = contract + "_" + amount + ".pdf";
-            
-            // 파일이 저장된 실제 경로 생성
+            const fileName = "위탁판매계약서_" + amount + ".pdf";
             const filePath = "./files/" + fileName;
 
-            // 가상의 다운로드 링크를 만들어 브라우저에 다운로드 명령 실행
             const link = document.createElement('a');
             link.href = filePath;
             link.download = fileName;
@@ -142,6 +155,17 @@
             link.click();
             document.body.removeChild(link);
         }
+
+        // 키보드 단축키 방지 (F12 개발자 도구, Ctrl+Shift+I, Ctrl+C 복사 등) 추가 옵션
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 123 || // F12
+                (event.ctrlKey && event.shiftKey && event.keyCode === 73) || // Ctrl+Shift+I
+                (event.ctrlKey && event.keyCode === 67) || // Ctrl+C
+                (event.ctrlKey && event.keyCode === 86) || // Ctrl+V
+                (event.ctrlKey && event.keyCode === 85)) { // Ctrl+U (소스보기)
+                event.preventDefault();
+            }
+        });
     </script>
 
 </body>
