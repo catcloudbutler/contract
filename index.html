@@ -6,16 +6,21 @@
     <title>광장대리점_위탁판매계약서</title>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
+        /* 모든 요소에 box-sizing 적용하여 여백 계산 오류 방지 */
+        * {
+            box-sizing: border-box;
+        }
+
         /* 기본 스타일 및 폰트 설정 */
         body {
             font-family: 'Nanum Gothic', sans-serif;
             background-color: #f0f2f5;
             margin: 0;
-            padding: 0;
+            padding: 20px; /* 모바일 기기 테두리 여백 확보 */
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* 세로가 짧은 모바일 화면에서 스크롤이 가능하도록 변경 */
             
             /* 보안: 텍스트 선택(드래그) 방지 */
             -webkit-user-select: none;
@@ -26,7 +31,7 @@
 
         .container {
             background-color: #ffffff;
-            padding: 50px;
+            padding: 50px 40px;
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -50,6 +55,7 @@
             font-size: 15px;
             margin-bottom: 35px;
             line-height: 1.6;
+            word-break: keep-all; /* 모바일에서 자동 줄바꿈 시 단어가 깨지지 않음 */
         }
 
         .section-box {
@@ -99,6 +105,10 @@
             box-sizing: border-box;
             margin-bottom: 18px;
             color: #333;
+            /* 모바일 브라우저 기본 화살표 스타일 유지 및 최적화 */
+            -webkit-appearance: select;
+            -moz-appearance: select;
+            appearance: select;
         }
 
         select:focus {
@@ -122,11 +132,11 @@
             border: none;
             width: 100%;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent; /* 모바일 터치 시 깜빡임 방지 */
         }
 
         .download-btn:hover {
             background-color: #001540;
-            transform: translateY(-1px);
         }
 
         .download-btn.secondary {
@@ -144,6 +154,38 @@
             color: #d93025;
             margin-top: 15px;
             font-weight: 700;
+            word-break: keep-all;
+        }
+
+        /* 📱 모바일 환경(화면 가로폭 576px 이하)을 위한 맞춤 스타일 */
+        @media (max-width: 576px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 35px 20px; /* 내부 여백을 줄여 콘텐츠 공간 확보 */
+            }
+            h1 {
+                font-size: 22px; /* 제목 크기 최적화 */
+            }
+            p.description {
+                font-size: 13.5px; /* 모바일에서 가독성 좋은 크기 */
+                margin-bottom: 25px;
+            }
+            .section-box {
+                padding: 20px 15px; /* 박스 내부 여백 축소 */
+                margin-bottom: 15px;
+            }
+            .section-title {
+                font-size: 15px;
+            }
+            .download-btn {
+                padding: 14px; /* 손가락 터치에 최적화된 컴팩트한 크기 */
+                font-size: 15px;
+            }
+            .footer-note {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
